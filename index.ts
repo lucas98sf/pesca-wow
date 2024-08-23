@@ -15,7 +15,7 @@ import "@udarrr/template-matcher";
 
 type STATE = "THROWING" | "FISHING" | "CATCHING";
 
-const DEBUG = true;
+const DEBUG = false;
 
 let fishingArea: Region | null = null;
 
@@ -25,9 +25,9 @@ new TaskRunner(async () => {
     while (state === "THROWING") {
       console.log("State", state);
       await keyboard.pressKey(Key.LeftShift);
-      await keyboard.pressKey(Key.Num6);
+      await keyboard.pressKey(Key.Q);
       await keyboard.releaseKey(Key.LeftShift);
-      await keyboard.releaseKey(Key.Num6);
+      await keyboard.releaseKey(Key.Q);
       await sleep(2000);
       state = "FISHING";
     }
@@ -37,16 +37,16 @@ new TaskRunner(async () => {
         await sleep(100);
         const isFishing = await imageResource("images/fishing.png");
         const searchRegion = new Region(740, 290, 500, 500);
-        // DEBUG && (await screen?.highlight(searchRegion));
+        DEBUG && (await screen?.highlight(searchRegion));
         const fishing = await screen?.find<OptionsSearchParameterType>(
           isFishing,
           {
-            confidence: 0.7,
+            confidence: 0.55,
             searchRegion: searchRegion,
           }
         );
         fishingArea = new Region(fishing.left, fishing.top, 35, 35);
-        // DEBUG && (await screen?.highlight(fishingArea));
+        DEBUG && (await screen?.highlight(fishingArea));
       } catch (error) {
         state = "CATCHING";
       }

@@ -41,7 +41,7 @@ new TaskRunner(async () => {
         const fishing = await screen?.find<OptionsSearchParameterType>(
           isFishing,
           {
-            confidence: 0.75,
+            confidence: 0.7,
             searchRegion: searchRegion,
           }
         );

@@ -17,6 +17,7 @@ class Region:
 class FishingBot:
     def __init__(self):
         self.fishing_area: Optional[Region] = None
+        self.DEBUG = True
         self.running = True
         self.state = "THROWING"
         
